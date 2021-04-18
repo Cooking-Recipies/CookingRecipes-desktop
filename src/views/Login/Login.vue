@@ -7,6 +7,8 @@
       <b-form-input size="lg" placeholder="password" id="password" type="password" v-model="formPassword"
                     required></b-form-input>
     </b-form-group>
+    <b-alert variant="danger" v-if="errors" show>{{ errors }}</b-alert>
+
     <b-button size="lg" @click="sendLoginRequest">Login</b-button>
   </b-form>
 </template>
@@ -20,7 +22,8 @@ export default {
     return {
       formEmail: null,
       formPassword: null,
-      url: 'http://localhost/api/'
+      url: 'http://localhost/api/',
+      errors: "",
     }
   },
   async created() {
@@ -37,9 +40,14 @@ export default {
         password: this.formPassword
       }
 
-      const response = await axios.post(this.url + "login", userCredentials)
-      localStorage.setItem("token", response.data.token)
-    }
+      try {
+        const response = await axios.post(this.url + "login", userCredentials)
+        localStorage.setItem("token", response.data.token)
+        this.$router.push("/")
+      } catch (error) {
+        this.errors = error.response.data.message
+      }
+    },
   }
 }
 </script>
