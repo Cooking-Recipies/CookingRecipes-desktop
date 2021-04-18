@@ -22,28 +22,20 @@ export default {
     return {
       formEmail: null,
       formPassword: null,
-      url: 'http://localhost/api/',
+      url: "http://localhost/api/",
       errors: "",
     }
   },
-  async created() {
-    await axios.get(this.url + "profiles", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
-    });
-  },
   methods: {
     sendLoginRequest: async function () {
-      let userCredentials = {
-        email: this.formEmail,
-        password: this.formPassword
-      }
-
       try {
-        const response = await axios.post(this.url + "login", userCredentials)
+        const response = await axios.post(this.url + "login", {
+          email: this.formEmail,
+          password: this.formPassword
+        })
         localStorage.setItem("token", response.data.token)
-        this.$router.push("/")
+        localStorage.setItem("username", response.data.name)
+        await this.$router.push({name: "/about"})
       } catch (error) {
         this.errors = error.response.data.message
       }
