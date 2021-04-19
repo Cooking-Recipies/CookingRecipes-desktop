@@ -43,7 +43,6 @@ export default {
     this.redirectIfNotLogged()
     this.getProfileInfo()
     this.getUploadedPhotos()
-
   },
   methods: {
     redirectIfNotLogged: function () {
@@ -76,7 +75,7 @@ export default {
         this.errors = error.response.data.message
       }
     },
-    getUploadedPhotos: async function() {
+    getUploadedPhotos: async function () {
       try {
         await axios.get("http://localhost/api/users/me/photos", {
           headers: {
