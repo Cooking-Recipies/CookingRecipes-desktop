@@ -1,16 +1,13 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand to="/">MAIN</b-navbar-brand>
+      <b-navbar-brand to="/">Main Page</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item to="/">Page 1</b-nav-item>
-          <b-nav-item to="/">Page 2</b-nav-item>
-          <b-nav-item to="/">Page 3</b-nav-item>
-          <b-nav-item to="about">About</b-nav-item>
+          <b-nav-item to="/addRecipe">Add recipe</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
