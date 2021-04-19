@@ -47,11 +47,10 @@ export default {
     }
   },
   created() {
-    let user = localStorage.getItem("username")
-    if (user !== null) {
+    let token = localStorage.getItem("token")
+    if (token !== null) {
       this.isLoggedIn = true
     }
-    console.log("created")
   }
 
 }

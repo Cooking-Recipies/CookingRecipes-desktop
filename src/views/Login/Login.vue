@@ -1,5 +1,5 @@
 <template>
-  <b-form>
+  <b-form @submit.prevent="sendLoginRequest">
     <b-form-group label-cols="4" label-cols-lg="2" label-size="lg" label="Email" label-for="email">
       <b-form-input size="lg" placeholder="email" id="email" v-model="formEmail" required></b-form-input>
     </b-form-group>
@@ -9,7 +9,7 @@
     </b-form-group>
     <b-alert variant="danger" v-if="errors" show>{{ errors }}</b-alert>
 
-    <b-button size="lg" @click="sendLoginRequest">Login</b-button>
+    <b-button size="lg" type="submit">Login</b-button>
   </b-form>
 </template>
 
@@ -26,6 +26,9 @@ export default {
       errors: "",
     }
   },
+  created() {
+    this.redirectIfLogged()
+  },
   methods: {
     sendLoginRequest: async function () {
       try {
@@ -34,12 +37,16 @@ export default {
           password: this.formPassword
         })
         localStorage.setItem("token", response.data.token)
-        localStorage.setItem("username", response.data.name)
-        await this.$router.push({name: "/about"})
+        window.location.reload()
       } catch (error) {
         this.errors = error.response.data.message
       }
     },
+    redirectIfLogged: function () {
+      if (localStorage.getItem("token")) {
+        this.$router.push("/")
+      }
+    }
   }
 }
 </script>
