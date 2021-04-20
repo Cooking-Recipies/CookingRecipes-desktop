@@ -5,7 +5,7 @@
       <b-form id="container">
         <b-row align-content="center">
           <b-col>
-            <h1>Select photos to upload</h1>{{"\n"}}
+            <h1>Select photos to upload</h1>
             <input type="file" id="photos" ref="photos" multiple v-on:change="handlePhotos"/>
           </b-col>
         </b-row>
