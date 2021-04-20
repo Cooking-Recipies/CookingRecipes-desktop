@@ -13,20 +13,20 @@
         <b-row>
           <b-col>
             <h1>Ingredients</h1>
-            <b-textarea></b-textarea>
+            <b-textarea v-model="ingredients"></b-textarea>
           </b-col>
         </b-row>
 
         <b-row>
           <b-col>
             <h1>Steps</h1>
-            <b-textarea></b-textarea>
+            <b-textarea v-model="steps"></b-textarea>
           </b-col>
         </b-row>
 
         <b-row>
           <b-col>
-            <b-button @click="submitPhotos">Upload recipe</b-button>
+            <b-button @click="submitForm">Upload recipe</b-button>
           </b-col>
         </b-row>
       </b-form>
@@ -36,21 +36,34 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "AddRecipe",
     data: function () {
       return {
+        url: "http://localhost/api/",
         correctPhotos: [],
-        approvedMimeExtensions: ["image/png", "image/svg+xml", "image/jpeg"]
+        approvedMimeExtensions: ["image/png", "image/svg+xml", "image/jpeg"],
+        ingredients: null,
+        steps: null,
       }
     },
     methods: {
-      submitPhotos: function () {
-        console.log(this.correctPhotos)
+      submitForm: async function () {
+        let form = this.getRecipeForm()
+        await axios.post(this.url + "recipe", form, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
     },
     handlePhotos: function () {
-      let userPhotos = this.$refs.photos.files
+      let userPhotos = this.getUserFiles()
       this.addCorrectPhotos(userPhotos)
+    },
+    getUserFiles: function () {
+      return this.$refs.photos.files
     },
     addCorrectPhotos: function (userPhotos) {
       for (let i = 0; i < userPhotos.length; i++) {
@@ -63,6 +76,13 @@ export default {
     },
     isExtensionValid: function (mimeExtension) {
       return this.approvedMimeExtensions.includes(mimeExtension)
+    },
+    getRecipeForm: function () {
+      return {
+        photos: this.correctPhotos,
+        ingredients: this.ingredients,
+        steps: this.steps
+      }
     }
   }
 }
