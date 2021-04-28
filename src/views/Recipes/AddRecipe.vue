@@ -1,28 +1,69 @@
 <template>
   <b-row align-v="start">
     <b-col>
-      <input type="file" id="photos" ref="photos" multiple v-on:change="handlePhotos"/>
-      <b-button @click="submitPhotos"></b-button>
+
+      <b-form id="container">
+        <b-row align-content="center">
+          <b-col>
+            <h1>Select photos to upload</h1>
+            <input type="file" id="photos" ref="photos" multiple v-on:change="handlePhotos"/>
+          </b-col>
+        </b-row>
+
+        <b-row>
+          <b-col>
+            <h1>Ingredients</h1>
+            <b-textarea v-model="ingredients"></b-textarea>
+          </b-col>
+        </b-row>
+
+        <b-row>
+          <b-col>
+            <h1>Steps</h1>
+            <b-textarea v-model="steps"></b-textarea>
+          </b-col>
+        </b-row>
+
+        <b-row>
+          <b-col>
+            <b-button @click="submitForm">Upload recipe</b-button>
+          </b-col>
+        </b-row>
+      </b-form>
+
     </b-col>
   </b-row>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "AddRecipe",
-  data: function () {
-    return {
-      correctPhotos: [],
-      approvedExtensions: ["image/png", "image/svg+xml", "image/jpeg"]
-    }
-  },
-  methods: {
+    data: function () {
+      return {
+        url: "http://localhost/api/",
+        correctPhotos: [],
+        approvedMimeExtensions: ["image/png", "image/svg+xml", "image/jpeg"],
+        ingredients: null,
+        steps: null,
+      }
+    },
+    methods: {
+      submitForm: async function () {
+        let form = this.getRecipeForm()
+        await axios.post(this.url + "recipe", form, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+    },
     handlePhotos: function () {
-      let userPhotos = this.$refs.photos.files
+      let userPhotos = this.getUserFiles()
       this.addCorrectPhotos(userPhotos)
     },
-    submitPhotos: function () {
-      console.log(this.correctPhotos)
+    getUserFiles: function () {
+      return this.$refs.photos.files
     },
     addCorrectPhotos: function (userPhotos) {
       for (let i = 0; i < userPhotos.length; i++) {
@@ -34,12 +75,21 @@ export default {
       }
     },
     isExtensionValid: function (mimeExtension) {
-      return this.approvedExtensions.includes(mimeExtension);
+      return this.approvedMimeExtensions.includes(mimeExtension)
+    },
+    getRecipeForm: function () {
+      return {
+        photos: this.correctPhotos,
+        ingredients: this.ingredients,
+        steps: this.steps
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-
+#container div {
+  padding: 10px;
+}
 </style>
