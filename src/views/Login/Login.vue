@@ -31,6 +31,13 @@ export default {
   },
   methods: {
     sendLoginRequest: async function () {
+      await this.getXSRFCookie()
+      await this.login()
+    },
+    getXSRFCookie: async function () {
+      await axios.get("http://localhost/sanctum/csrf-cookie")
+    },
+    login: async function () {
       try {
         const response = await axios.post(this.url + "login", {
           email: this.formEmail,

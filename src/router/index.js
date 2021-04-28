@@ -4,6 +4,7 @@ import Home from '../views/HomePage/Home.vue'
 import Login from '../views/Login/Login.vue'
 import Register from '../views/Login/Register.vue'
 import Profile from "../views/UserProfile/Profile";
+import AddRecipe from "../views/Recipes/AddRecipe";
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/addRecipe',
+    name: 'Recipe',
+    component: AddRecipe
   },
 ]
 
