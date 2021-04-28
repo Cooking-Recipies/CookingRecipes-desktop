@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/HomePage/Home.vue'
 import Login from '../views/Login/Login.vue'
 import Register from '../views/Login/Register.vue'
-import Profile from "../views/UserProfile/Profile";
+import ProfileCard from "../views/UserProfile/ProfileCard";
 import AddRecipe from "../views/Recipes/AddRecipe";
 
 Vue.use(VueRouter)
@@ -34,8 +34,8 @@ const routes = [
   },
   {
     path: '/profile',
-    name: 'Profile',
-    component: Profile
+    name: 'ProfileCard',
+    component: ProfileCard
   },
   {
     path: '/addRecipe',
