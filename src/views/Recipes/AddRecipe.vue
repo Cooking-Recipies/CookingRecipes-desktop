@@ -40,29 +40,29 @@ import axios from "axios";
 
 export default {
   name: "AddRecipe",
-    data: function () {
-      return {
-        url: "http://localhost/api/",
-        correctPhotos: [],
-        approvedMimeExtensions: ["image/png", "image/svg+xml", "image/jpeg"],
-        ingredients: null,
-        steps: null,
-      }
-    },
-    methods: {
-      submitForm: async function () {
-        let form = this.getRecipeForm()
-        await axios.post(this.url + "recipe", form, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          }
-        })
+  data: function () {
+    return {
+      url: "http://localhost/api/",
+      correctPhotos: [],
+      approvedMimeExtensions: ["image/png", "image/svg+xml", "image/jpeg"],
+      ingredients: null,
+      steps: null,
+    }
+  },
+  methods: {
+    submitForm: async function () {
+      let form = this.getRecipeForm()
+      await axios.post(this.url + "recipe", form, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
     },
     handlePhotos: function () {
-      let userPhotos = this.getUserFiles()
+      let userPhotos = this.getUserPhotos()
       this.addCorrectPhotos(userPhotos)
     },
-    getUserFiles: function () {
+    getUserPhotos: function () {
       return this.$refs.photos.files
     },
     addCorrectPhotos: function (userPhotos) {
