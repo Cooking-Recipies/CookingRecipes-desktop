@@ -66,7 +66,6 @@
         </b-row>
 
 
-
         <ul v-if="errors">
           <b-alert variant="danger" v-model="isAlertShown" dismissible>
             <li v-for="(message, error) in errors" :key="error">{{ message[0] }}</li>
@@ -123,7 +122,6 @@ export default {
         })
         window.location.reload()
       } catch (error) {
-        console.log(error.response.data.data)
         this.isAlertShown = true
         this.errors = error.response.data.data
       }
@@ -139,7 +137,6 @@ export default {
       for (let i = 0; i < userPhotos.length; i++) {
         let file = userPhotos[i]
         if (this.isExtensionValid(file.type)) {
-          console.log("adding", file.name)
           this.correctPhotos.push(file)
         }
       }
@@ -162,12 +159,10 @@ export default {
     getCategories: async function () {
       const response = await axios.get(this.url + "categories")
       this.categories = response.data.data
-      console.log(this.categories)
     },
     getTags: async function () {
       const response = await axios.get(this.url + "tags")
       this.tags = response.data.data
-      console.log(this.tags)
     },
     setCategory: function (categoryId) {
       this.selectedCategory = categoryId
@@ -180,6 +175,7 @@ export default {
 #container div {
   padding: 10px;
 }
+
 li {
   list-style-type: none;
 }
