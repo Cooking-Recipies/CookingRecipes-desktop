@@ -43,7 +43,13 @@
         <b-row>
           <b-col>
             <h1>Ingredients</h1>
-            <b-textarea v-model="ingredients" required></b-textarea>
+              <b-form-group label-cols="2" label="Ingredient" label-for="ingredient">
+                <b-input v-model="ingredient" id="ingredient" required></b-input>
+              </b-form-group>
+
+              <b-form-group label-cols="2" label="Amount" label-for="amount">
+                <b-input v-model="ingredientAmount" placeholder="amount" id="amount" required></b-input>
+              </b-form-group>
           </b-col>
         </b-row>
 
@@ -97,7 +103,8 @@ export default {
       cookingTime: null,
       correctPhotos: [],
       approvedMimeExtensions: ["image/png", "image/svg+xml", "image/jpeg"],
-      ingredients: null,
+      ingredient: null,
+      ingredientAmount: 0,
       steps: null,
       categories: [],
       tags: [],
@@ -151,7 +158,7 @@ export default {
         number_of_people: this.servings,
         preparing_time: this.cookingTime,
         instruction: this.steps,
-        components: [{"name": "placeholder", "quantity": "5g"}],
+        components: [{"name": this.ingredient, "quantity": this.ingredientAmount}],
         //photos: this.correctPhotos,
         tags: this.selectedTags
       }
@@ -166,7 +173,7 @@ export default {
     },
     setCategory: function (categoryId) {
       this.selectedCategory = categoryId
-    }
+    },
   }
 }
 </script>
