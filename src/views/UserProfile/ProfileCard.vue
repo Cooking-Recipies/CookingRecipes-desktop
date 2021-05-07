@@ -9,9 +9,6 @@
         </b-row>
 
         <b-row>
-        </b-row>
-
-        <b-row>
           <ProfileSettings/>
         </b-row>
 

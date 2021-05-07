@@ -1,12 +1,14 @@
 <template>
-  <div>
-
-  </div>
+  <b-col>
+    <PasswordChange/>
+  </b-col>
 </template>
 
 <script>
+import PasswordChange from "./PasswordChange";
 export default {
-  name: "ProfileSettings"
+  name: "ProfileSettings",
+  components: {PasswordChange}
 }
 </script>
 

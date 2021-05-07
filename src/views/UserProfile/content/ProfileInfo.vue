@@ -61,7 +61,6 @@ export default {
         await axios.put(this.url + "me", form, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
-            //"X-XSRF-TOKEN": document.cookie.split("=")[1]
           }
         })
         window.location.reload()
