@@ -26,7 +26,7 @@
             </div>
             <div v-if="isLoggedIn">
               <b-dropdown-item to="/profile">Manage account</b-dropdown-item>
-              <b-dropdown-item to="/logout">Logout</b-dropdown-item>
+              <b-dropdown-item @click="logout">Logout</b-dropdown-item>
             </div>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -48,8 +48,13 @@ export default {
     if (token !== null) {
       this.isLoggedIn = true
     }
+  },
+  methods: {
+    logout: function () {
+      localStorage.clear()
+      window.location.reload()
+    }
   }
-
 }
 </script>
 
