@@ -13,7 +13,7 @@
       <b-input type="password" v-model="newConfirmation"></b-input>
     </b-form-group>
 
-    <b-button @click="changePassword">Change</b-button>
+    <b-button @click="changePassword">Change password</b-button>
 
   </b-form>
 </template>
