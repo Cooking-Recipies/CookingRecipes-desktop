@@ -6,6 +6,7 @@
 
         <b-row>
           <ProfileInfo/>
+          <ProfileSocial/>
         </b-row>
 
         <b-row>
@@ -21,10 +22,11 @@
 <script>
 import ProfileInfo from "./content/ProfileInfo";
 import ProfileSettings from "./content/ProfileSettings";
+import ProfileSocial from "./content/ProfileSocial";
 
 export default {
   name: "ProfileCard",
-  components: {ProfileSettings, ProfileInfo},
+  components: {ProfileSocial, ProfileSettings, ProfileInfo},
   created() {
     this.redirectIfNotLogged()
   },
