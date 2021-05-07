@@ -3,8 +3,10 @@ import VueRouter from 'vue-router'
 import Home from '../views/HomePage/Home.vue'
 import Login from '../views/Login/Login.vue'
 import Register from '../views/Login/Register.vue'
-import Profile from "../views/UserProfile/Profile";
+import ProfileCard from "../views/UserProfile/ProfileCard";
 import AddRecipe from "../views/Recipes/AddRecipe";
+import ProfilePicture from "../views/UserProfile/content/ProfilePicture";
+import ProfileUploadedPhotos from "../views/UserProfile/content/ProfileUploadedPhotos";
 
 Vue.use(VueRouter)
 
@@ -34,8 +36,18 @@ const routes = [
   },
   {
     path: '/profile',
-    name: 'Profile',
-    component: Profile
+    name: 'ProfileCard',
+    component: ProfileCard
+  },
+  {
+    path: '/profilePicture',
+    name: 'ProfilePicture',
+    component: ProfilePicture
+  },
+  {
+    path: '/profileUploadedPhotos',
+    name: 'ProfileUploadedPhotos',
+    component: ProfileUploadedPhotos
   },
   {
     path: '/addRecipe',
