@@ -9,7 +9,6 @@
         </b-row>
 
         <b-row>
-          <ProfilePicture/>
         </b-row>
 
         <b-row>
@@ -28,13 +27,12 @@
 
 <script>
 import ProfileInfo from "./content/ProfileInfo";
-import ProfilePicture from "./content/ProfilePicture";
 import ProfileSettings from "./content/ProfileSettings";
 import ProfileUploadedPhotos from "./content/ProfileUploadedPhotos";
 
 export default {
   name: "ProfileCard",
-  components: {ProfileUploadedPhotos, ProfileSettings, ProfilePicture, ProfileInfo},
+  components: {ProfileUploadedPhotos, ProfileSettings, ProfileInfo},
   created() {
     this.redirectIfNotLogged()
   },
