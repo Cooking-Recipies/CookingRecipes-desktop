@@ -34,7 +34,7 @@ export default {
       })
       this.newPictureId = response.data.data.photo_id
     },
-    changeProfilePicture: async function () {      
+    changeProfilePicture: async function () {
       let form = {"photo_id": this.newPictureId}
 
       await axios.put(this.url + "profiles/me", form, {
