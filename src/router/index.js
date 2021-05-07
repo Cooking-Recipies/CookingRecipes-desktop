@@ -5,6 +5,7 @@ import Login from '../views/Login/Login.vue'
 import Register from '../views/Login/Register.vue'
 import ProfileCard from "../views/UserProfile/ProfileCard";
 import AddRecipe from "../views/Recipes/AddRecipe";
+import ProfilePicture from "../views/UserProfile/content/ProfilePicture";
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,11 @@ const routes = [
     path: '/profile',
     name: 'ProfileCard',
     component: ProfileCard
+  },
+  {
+    path: '/profilePicture',
+    name: 'ProfilePicture',
+    component: ProfilePicture
   },
   {
     path: '/addRecipe',

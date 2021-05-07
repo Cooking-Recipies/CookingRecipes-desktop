@@ -2,7 +2,12 @@
   <div>
     <b-form @submit.prevent="updateProfile">
       <b-row>
-        <b-img src="@/assets/user.svg" height="100px"></b-img>
+        <b-col>
+          <b-img src="@/assets/user.svg" height="100px"></b-img>
+          <b-button @click="$router.push('/profilePicture')">
+            Change profile picture
+          </b-button>
+        </b-col>
         <b-input v-if="userProfileData" :value="userProfileData.name" v-model="userProfileData.name"></b-input>
       </b-row>
 
