@@ -48,7 +48,7 @@
               </b-form-group>
 
               <b-form-group label-cols="2" label="Amount" label-for="amount">
-                <b-input v-model="ingredientAmount" placeholder="amount" id="amount" required></b-input>
+                <b-input v-model="ingredientAmount" id="amount" required></b-input>
               </b-form-group>
           </b-col>
         </b-row>
@@ -104,7 +104,7 @@ export default {
       correctPhotos: [],
       approvedMimeExtensions: ["image/png", "image/svg+xml", "image/jpeg"],
       ingredient: null,
-      ingredientAmount: 0,
+      ingredientAmount: null,
       steps: null,
       categories: [],
       tags: [],
@@ -121,6 +121,7 @@ export default {
   methods: {
     submitForm: async function () {
       let form = this.getRecipeForm()
+      console.log(form)
       try {
         await axios.post(this.url + "recipes", form, {
           headers: {
