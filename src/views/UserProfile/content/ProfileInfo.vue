@@ -3,7 +3,7 @@
     <b-form @submit.prevent="updateProfile">
       <b-row>
         <b-col>
-          <b-img src="@/assets/user.svg" height="100px"></b-img>
+          <b-img :src="userProfilePicture"  height="100px"></b-img>
           <b-button @click="$router.push('/profilePicture')">
             Change profile picture
           </b-button>
@@ -34,6 +34,7 @@ export default {
     return {
       url: "http://localhost/api/profiles/",
       userProfileData: null,
+      userProfilePicture: "",
       errors: "",
     }
   },
@@ -49,6 +50,7 @@ export default {
           }
         })
         this.userProfileData = response.data.data
+        this.userProfilePicture = response.data.data.photo.url
       } catch (error) {
         this.errors = error.response.data.message
       }

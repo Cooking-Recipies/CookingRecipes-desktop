@@ -42,6 +42,7 @@ export default {
           Authorization: "Bearer " + localStorage.getItem("token")
         }
       })
+      await this.$router.push("/profile")
     },
     handlePicture: function (event) {
       this.picture = event.target.files[0]
