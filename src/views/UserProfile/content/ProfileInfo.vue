@@ -1,12 +1,25 @@
 <template>
   <div>
+
     <b-form @submit.prevent="updateProfile">
-      <b-row>
+      <b-row align-v="center">
         <b-col>
-          <b-img :src="userProfilePicture"  height="100px"></b-img>
+          <b-img :src="userProfilePicture" height="100px"></b-img>
+
+        </b-col>
+
+        <b-col>
           <b-button @click="$router.push('/profilePicture')">
             Change profile picture
           </b-button>
+
+        </b-col>
+
+        <b-col>
+          <b-button @click="$router.push('/profileUploadedPhotos')">
+            See your uploaded photos
+          </b-button>
+
         </b-col>
         <b-input v-if="userProfileData" :value="userProfileData.name" v-model="userProfileData.name"></b-input>
       </b-row>
@@ -22,6 +35,7 @@
     <div v-if="errors">
       <b-alert variant="danger" show>{{ errors }}</b-alert>
     </div>
+
   </div>
 </template>
 
@@ -51,6 +65,7 @@ export default {
         })
         this.userProfileData = response.data.data
         this.userProfilePicture = response.data.data.photo.url
+        console.log(this.userProfilePicture)
       } catch (error) {
         this.errors = error.response.data.message
       }
