@@ -43,14 +43,11 @@ export default {
   methods: {
     getProfile: async function () {
       const response = await axios.get(this.url + "profiles/" + this.$route.params.id)
-      console.log(response.data.data)
       this.profile = response.data.data
     },
     getRecipes: async function () {
       const response = await axios.get(this.url + "users/" + this.$route.params.id + "/recipes")
       this.recipes = response.data.data
-      console.log(response.data.data)
-
     }
   }
 }
