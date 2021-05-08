@@ -1,7 +1,6 @@
 <template>
   <b-row>
-    <b-col
-           id="recipe"
+    <b-col id="recipe"
            :items="recipes"
            :per-page="getPerPage"
            :current-page="currentPage"
@@ -56,9 +55,6 @@ export default {
   computed: {
     getRows: function () {
       return this.recipes.length
-    },
-    getTotalPages: function () {
-      return this.paginationData.total_pages
     },
     getPerPage: function () {
       return this.paginationData.per_page
