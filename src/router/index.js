@@ -7,6 +7,8 @@ import ProfileCard from "../views/UserProfile/ProfileCard";
 import AddRecipe from "../views/Recipes/AddRecipe";
 import ProfilePicture from "../views/UserProfile/content/ProfilePicture";
 import ProfileUploadedPhotos from "../views/UserProfile/content/ProfileUploadedPhotos";
+import BrowseRecipes from "../views/Recipes/BrowseRecipes";
+import DisplayRecipe from "../views/Recipes/DisplayRecipe";
 
 Vue.use(VueRouter)
 
@@ -53,6 +55,16 @@ const routes = [
     path: '/addRecipe',
     name: 'Recipe',
     component: AddRecipe
+  },
+  {
+    path: '/browseRecipes',
+    name: 'BrowseRecipes',
+    component: BrowseRecipes
+  },
+  {
+    path: '/displayRecipe',
+    name: 'DisplayRecipe',
+    component: DisplayRecipe
   },
 ]
 

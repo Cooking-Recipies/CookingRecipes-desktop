@@ -1,18 +1,31 @@
 <template>
   <b-card-group deck>
     <b-card
-        title="Title of the recipe"
-        :img-src="image_src"
-        img-alt="Image"
+        :title="title"
+        :img-src="image"
+        :img-alt="title"
         img-top
         style="width: 24rem;"
         class="mb-2"
     >
       <b-card-text>
-        Some quick example text briefly describing a recipe. This is example #{{ title }}
+        {{ category }}
       </b-card-text>
 
-      <b-button href="#" variant="info">Go to the recipe page</b-button>
+      <b-card-body>
+        <b-img src="@/assets/like.svg" height="25"></b-img>
+        {{ likes }}
+      </b-card-body>
+
+      <b-card-footer v-for="(tag, index) in tags" :key="index">
+        <b-row>
+          <b-col>
+            {{ tag }}
+          </b-col>
+        </b-row>
+      </b-card-footer>
+
+      <b-button @click="goToRecipePage" variant="info">Go to the recipe page</b-button>
     </b-card>
   </b-card-group>
 </template>
@@ -22,13 +35,17 @@ export default {
   name: "RecipeCard",
   props: {
     title: String,
-    description: Text,
-    likes: String,
-    image_src: String
+    category: String,
+    likes: Number,
+    image: String,
+    tags: Array,
+    recipeId: String,
+    authorId: String
+  },
+  methods: {
+    goToRecipePage: function () {
+      this.$router.push({name: "DisplayRecipe", params: {id: this.recipeId}})
+    }
   }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -10,6 +10,10 @@
           <b-nav-item to="/addRecipe">Add recipe</b-nav-item>
         </b-navbar-nav>
 
+        <b-navbar-nav>
+          <b-nav-item to="/browseRecipes">Browse recipes</b-nav-item>
+        </b-navbar-nav>
+
         <b-navbar-nav class="ml-auto">
           <b-nav-form>
             <b-form-input size="sm" class="mr-sm-2" placeholder="Search for a recipe"></b-form-input>
