@@ -45,7 +45,6 @@ export default {
       const response = await axios.get(this.url + "recipes")
       this.recipes = response.data.data[0]
     }
-
   }
 }
 </script>
