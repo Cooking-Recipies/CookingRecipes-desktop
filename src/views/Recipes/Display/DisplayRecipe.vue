@@ -14,10 +14,14 @@
         </b-col>
 
         <b-col cols="9">
+          <h4>Author of the recipe</h4>
+            <b-button @click="goToProfile">{{author.name}}</b-button>
+
           <Steps :ingredients="recipe.components"
                  :steps="recipe.instruction"
           />
 
+          <Photos :photos="recipe.photos"/>
         </b-col>
 
       </b-row>
@@ -30,32 +34,44 @@
 import axios from "axios";
 import Info from "./Info";
 import Steps from "./Steps";
+import Photos from "./Photos";
 
 export default {
   name: "DisplayRecipe",
-  components: {Steps, Info},
+  components: {Photos, Steps, Info},
   props: {
     title: String,
     category: String,
     tags: Array,
-    likes: Number
+    likes: Number,
   },
   data: function () {
     return {
-      recipe: []
+      recipe: [],
+      author: [],
     }
   },
   created() {
-    let recipeId = this.$route.params.id
-    this.getRecipe(recipeId)
+    this.getData()
   },
   methods: {
-    getRecipe: async function (id) {
-      const response = await axios.get("http://localhost/api/recipes/" + id)
+    getData: async function () {
+      await this.getRecipe()
+      await this.getAuthorProfile()
+    },
+    getRecipe: async function () {
+      let recipeId = this.$route.params.id
+      const response = await axios.get("http://localhost/api/recipes/" + recipeId)
       this.recipe = response.data.data
-      console.log(this.recipe)
+    },
+    getAuthorProfile: async function () {
+      const response = await axios.get("http://localhost/api/profiles/" + this.recipe.user_profile_id)
+      this.author = response.data.data
+    },
+    goToProfile: function () {
+      this.$router.push({name: "ProfileDisplay", params: { id: this.recipe.user_profile_id } })
     }
-  }
+  },
 }
 </script>
 
