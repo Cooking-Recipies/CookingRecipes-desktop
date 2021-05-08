@@ -39,7 +39,7 @@ export default {
     likes: Number,
     image: String,
     tags: Array,
-    recipeId: String,
+    recipeId: Number,
     authorId: String
   },
   methods: {

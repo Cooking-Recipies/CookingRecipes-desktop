@@ -1,18 +1,30 @@
 <template>
-  <b-col cols="4" id="recipe">
-    <b-card-group deck>
-      <recipe-card v-for="(recipe) in recipes" :key="recipe.recipe_id"
-                   :title="recipe.title"
-                   :category="recipe.category"
-                   :likes="recipe.likes.likes_count"
-                   :tags="recipe.tags"
-                   :image_src="recipe.photos"
-                   :recipe-id="recipe.recipe_id"
-      ></recipe-card>
-    </b-card-group>
-    <b-button @click="fetchNewRecipes(1)">Previous</b-button>
-    <b-button @click="fetchNewRecipes(-1)">Next</b-button>
-  </b-col>
+  <b-row>
+    <b-col
+           id="recipe"
+           :items="recipes"
+           :per-page="getPerPage"
+           :current-page="currentPage"
+    >
+
+      <b-card-group v-model="recipes" deck>
+        <recipe-card v-for="(recipe) in recipes" :key="recipe.recipe_id"
+                     :title="recipe.title"
+                     :category="recipe.category"
+                     :likes="recipe.likes.likes_count"
+                     :tags="recipe.tags"
+                     :image_src="recipe.photos"
+                     :recipe-id="recipe.recipe_id"
+        ></recipe-card>
+      </b-card-group>
+      <b-pagination
+          v-model="currentPage"
+          :total-rows="getRows"
+          :per-page="getPerPage"
+          aria-controls="recipe"
+      ></b-pagination>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
@@ -26,8 +38,9 @@ export default {
     return {
       url: "http://localhost/api/",
       recipes: [],
-      currentPage: 0,
-      pages: 0
+      paginationData: [],
+      currentPage: 1,
+      perPage: 0,
     }
   },
   created() {
@@ -37,14 +50,19 @@ export default {
     getRecipes: async function () {
       const response = await axios.get(this.url + "recipes")
       this.recipes = response.data.data
-      this.pages = response.data.pagination.total_pages
-      console.log(response.data.data)
+      this.paginationData = response.data.pagination
     },
-    fetchNewRecipes: async function (page) {
-      this.currentPage += page
-      const response = await axios.get(this.url + "recipes")
-      this.recipes = response.data.data[0]
-    }
+  },
+  computed: {
+    getRows: function () {
+      return this.recipes.length
+    },
+    getTotalPages: function () {
+      return this.paginationData.total_pages
+    },
+    getPerPage: function () {
+      return this.paginationData.per_page
+    },
   }
 }
 </script>
