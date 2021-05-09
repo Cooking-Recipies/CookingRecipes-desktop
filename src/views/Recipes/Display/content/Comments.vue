@@ -13,11 +13,24 @@
       </b-col>
     </b-row>
 
-    <b-row>
-      <b-col>
-        
-      </b-col>
-    </b-row>
+    <b-form v-if="isLogged">
+      <b-row>
+        <b-col cols="2">
+          <b-form-group label-cols="4" label-cols-lg="2" label-size="lg" label="Rating"
+                        label-for="rating"></b-form-group>
+          <b-form-input list="rating" v-model="rating"></b-form-input>
+          <datalist id="rating">
+            <option v-for="rate in rates" :key="rate">{{ rate }}</option>
+          </datalist>
+        </b-col>
+        <b-col>
+          <b-form-group label-cols="4" label-cols-lg="2" label-size="lg" label="Comment"
+                        label-for="comment"></b-form-group>
+          <b-input ref="comment" v-model="comment"></b-input>
+        </b-col>
+      </b-row>
+      <b-button @click="sendComment">Send</b-button>
+    </b-form>
   </div>
 </template>
 
@@ -32,25 +45,42 @@ export default {
   data: function () {
     return {
       url: "http://localhost/api/recipes/",
-      comments: []
+      comments: [],
+      rates: [1, 2, 3, 4, 5],
+      rating: null,
+      comment: null,
+      isLogged: false
     }
   },
   created() {
+    this.checkIfLogged()
     this.getRates()
   },
   methods: {
     getRates: async function () {
-      // eslint-disable-next-line no-unused-vars
-      const response = axios.get(this.url + this.recipeId + "/rates")
+      axios.get(this.url + this.recipeId + "/rates")
           .then((value) => {
             this.comments = value.data.data
           })
-      console.log("com", response)
+    },
+    sendComment: async function () {
+      let form = {
+        "rate": this.rating,
+        "comment": this.comment
+      }
+      console.log(form)
+      await axios.post(this.url + this.recipeId + "/rates", form, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      window.location.reload()
+    },
+    checkIfLogged: function () {
+      if (localStorage.getItem("token") !== null) {
+        this.isLogged = true
+      }
     }
-  }
+  },
 }
 </script>
-
-<style scoped>
-
-</style>
