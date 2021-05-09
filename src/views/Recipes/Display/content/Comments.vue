@@ -3,6 +3,7 @@
     <b-row>
       <b-col>
         <div v-for="comment in comments" :key="comment.id">
+          <hr>
           <h4>{{ comment.comment }}<br>
 
             Likes {{ comment.likes.likes_count }}<br>
@@ -68,13 +69,12 @@ export default {
         "rate": this.rating,
         "comment": this.comment
       }
-      console.log(form)
       await axios.post(this.url + this.recipeId + "/rates", form, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token")
         }
       })
-      window.location.reload()
+      await this.$router.push("/browseRecipes")
     },
     checkIfLogged: function () {
       if (localStorage.getItem("token") !== null) {
