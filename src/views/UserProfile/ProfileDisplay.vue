@@ -24,7 +24,7 @@
 
 <script>
 import axios from "axios";
-import RecipeCard from "../HomePage/RecipeCard";
+import RecipeCard from "../Recipes/RecipeCard";
 
 export default {
   name: "ProfileDisplay",

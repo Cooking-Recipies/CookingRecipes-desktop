@@ -26,7 +26,7 @@
 
 <script>
 import axios from "axios";
-import RecipeCard from "../../HomePage/RecipeCard";
+import RecipeCard from "../RecipeCard";
 
 export default {
   name: "UserRecipes",

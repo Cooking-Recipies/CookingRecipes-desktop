@@ -7,7 +7,7 @@
 
 <script>
 import RecipeCarousel from './RecipeCarousel.vue'
-import RecipeCardDeck from "./RecipeCardDeck";
+import RecipeCardDeck from "../Recipes/RecipeCardDeck";
 
 export default {
   name: 'Home',
