@@ -128,7 +128,7 @@ export default {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
         })
-        window.location.reload()
+        this.$router.push('/userRecipes')
       } catch (error) {
         this.isAlertShown = true
         this.errors = error.response.data.data
