@@ -37,7 +37,6 @@ export default {
   methods: {
     getRandomRecipes: function () {
       let setOfIds = this.generateSetOfIds()
-      console.log(setOfIds)
       for (let recipeId of setOfIds) {
         this.getRecipe(recipeId)
       }
@@ -46,7 +45,6 @@ export default {
       const response = await axios.get(this.url + id)
       this.recipes.push(response.data.data)
       this.currentRecipeId = id
-      console.log(response.data.data)
     },
     generateSetOfIds: function () {
       let ids = new Set()
@@ -58,7 +56,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
