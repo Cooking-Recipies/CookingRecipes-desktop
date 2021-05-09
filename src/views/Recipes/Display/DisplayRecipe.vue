@@ -22,6 +22,8 @@
           />
 
           <Photos :photos="recipe.photos"/>
+
+          <Comments :recipe-id="$route.params.id"/>
         </b-col>
 
       </b-row>
@@ -35,10 +37,11 @@ import axios from "axios";
 import Info from "./content/Info";
 import Steps from "./content/Steps";
 import Photos from "./content/Photos";
+import Comments from "./content/Comments";
 
 export default {
   name: "DisplayRecipe",
-  components: {Photos, Steps, Info},
+  components: {Comments, Photos, Steps, Info},
   props: {
     title: String,
     category: String,
