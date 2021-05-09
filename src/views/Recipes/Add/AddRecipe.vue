@@ -122,7 +122,6 @@ export default {
     submitForm: async function () {
       await this.uploadPhotos()
       let form = this.getRecipeForm()
-      console.log(form)
       try {
         await axios.post(this.url + "recipes", form, {
           headers: {
@@ -146,11 +145,9 @@ export default {
         })
         this.photosIds.push(response.data.data.photo_id)
       }
-      console.log(this.photosIds)
     },
     handlePhotos: function (event) {
       this.photos = event.target.files
-      console.log(event.target.files)
     },
     getRecipeForm: function () {
       return {
