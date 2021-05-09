@@ -32,9 +32,9 @@
 
 <script>
 import axios from "axios";
-import Info from "./Info";
-import Steps from "./Steps";
-import Photos from "./Photos";
+import Info from "./content/Info";
+import Steps from "./content/Steps";
+import Photos from "./content/Photos";
 
 export default {
   name: "DisplayRecipe",
