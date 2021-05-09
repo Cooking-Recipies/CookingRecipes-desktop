@@ -1,6 +1,6 @@
 <template>
   <div id="photos">
-    <b-img v-for="(photo, index) in photos" :key="index" :src="photo"></b-img>
+    <b-img v-for="(photo, index) in photos" :key="index" :src="photo.url" height="400"></b-img>
   </div>
 </template>
 

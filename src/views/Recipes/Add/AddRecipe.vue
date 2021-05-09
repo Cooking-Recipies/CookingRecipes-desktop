@@ -36,20 +36,20 @@
         <b-row>
           <b-col>
             <h1>Select photos to upload</h1>
-            <input type="file" id="photos" ref="photos" multiple v-on:change="handlePhotos"/>
+            <input accept="image/*" type="file" id="photos" ref="photos" multiple v-on:change="handlePhotos"/>
           </b-col>
         </b-row>
 
         <b-row>
           <b-col>
             <h1>Ingredients</h1>
-              <b-form-group label-cols="2" label="Ingredient" label-for="ingredient">
-                <b-input v-model="ingredient" id="ingredient" required></b-input>
-              </b-form-group>
+            <b-form-group label-cols="2" label="Ingredient" label-for="ingredient">
+              <b-input v-model="ingredient" id="ingredient" required></b-input>
+            </b-form-group>
 
-              <b-form-group label-cols="2" label="Amount" label-for="amount">
-                <b-input v-model="ingredientAmount" id="amount" required></b-input>
-              </b-form-group>
+            <b-form-group label-cols="2" label="Amount" label-for="amount">
+              <b-input v-model="ingredientAmount" id="amount" required></b-input>
+            </b-form-group>
           </b-col>
         </b-row>
 
@@ -101,11 +101,11 @@ export default {
       title: null,
       servings: null,
       cookingTime: null,
-      correctPhotos: [],
-      approvedMimeExtensions: ["image/png", "image/svg+xml", "image/jpeg"],
       ingredient: null,
       ingredientAmount: null,
       steps: null,
+      photos: [],
+      photosIds: [],
       categories: [],
       tags: [],
       selectedTags: [],
@@ -120,6 +120,7 @@ export default {
   },
   methods: {
     submitForm: async function () {
+      await this.uploadPhotos()
       let form = this.getRecipeForm()
       console.log(form)
       try {
@@ -128,29 +129,28 @@ export default {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
         })
-        this.$router.push('/userRecipes')
+        await this.$router.push('/userRecipes')
       } catch (error) {
         this.isAlertShown = true
         this.errors = error.response.data.data
       }
     },
-    handlePhotos: function () {
-      let userPhotos = this.getUserPhotos()
-      this.addCorrectPhotos(userPhotos)
-    },
-    getUserPhotos: function () {
-      return this.$refs.photos.files
-    },
-    addCorrectPhotos: function (userPhotos) {
-      for (let i = 0; i < userPhotos.length; i++) {
-        let file = userPhotos[i]
-        if (this.isExtensionValid(file.type)) {
-          this.correctPhotos.push(file)
-        }
+    uploadPhotos: async function () {
+      for (let i = 0; i < this.photos.length; i++) {
+        let photoForm = new FormData()
+        photoForm.append("image", this.photos[i])
+        const response = await axios.post(this.url + "photos", photoForm, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+        this.photosIds.push(response.data.data.photo_id)
       }
+      console.log(this.photosIds)
     },
-    isExtensionValid: function (mimeExtension) {
-      return this.approvedMimeExtensions.includes(mimeExtension)
+    handlePhotos: function (event) {
+      this.photos = event.target.files
+      console.log(event.target.files)
     },
     getRecipeForm: function () {
       return {
@@ -160,7 +160,7 @@ export default {
         preparing_time: this.cookingTime,
         instruction: this.steps,
         components: [{"name": this.ingredient, "quantity": this.ingredientAmount}],
-        //photos: this.correctPhotos,
+        photos: this.photosIds,
         tags: this.selectedTags
       }
     },
