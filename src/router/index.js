@@ -10,6 +10,7 @@ import ProfileUploadedPhotos from "../views/UserProfile/content/ProfileUploadedP
 import BrowseRecipes from "../views/Recipes/Display/BrowseRecipes";
 import DisplayRecipe from "../views/Recipes/Display/DisplayRecipe";
 import ProfileDisplay from "../views/UserProfile/ProfileDisplay";
+import UserRecipes from "../views/Recipes/Display/UserRecipes";
 
 Vue.use(VueRouter)
 
@@ -71,6 +72,11 @@ const routes = [
     path: '/profileDisplay',
     name: 'ProfileDisplay',
     component: ProfileDisplay
+  },
+  {
+    path: '/UserRecipes',
+    name: 'userRecipes',
+    component: UserRecipes
   },
 ]
 

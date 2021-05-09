@@ -3,8 +3,7 @@
     <b-col id="recipe"
            :items="recipes"
            :per-page="getPerPage"
-           :current-page="currentPage"
-    >
+           :current-page="currentPage">
       <b-card-group v-model="recipes" deck>
         <recipe-card v-for="(recipe) in recipes" :key="recipe.recipe_id"
                      :title="recipe.title"
@@ -30,7 +29,7 @@ import axios from "axios";
 import RecipeCard from "../../HomePage/RecipeCard";
 
 export default {
-  name: "BrowseRecipes",
+  name: "UserRecipes",
   components: {RecipeCard},
   data: function () {
     return {
@@ -38,14 +37,24 @@ export default {
       recipes: [],
       paginationData: [],
       currentPage: 1,
+      profileId: null
     }
   },
-  created() {
-    this.getRecipes()
+  async created() {
+    await this.getProfileId()
+    await this.getRecipesById()
   },
   methods: {
-    getRecipes: async function () {
-      const response = await axios.get(this.url + "recipes")
+    getProfileId: async function () {
+      const response = await axios.get(this.url + "profiles/me", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      this.profileId = response.data.data.profile_id
+    },
+    getRecipesById: async function () {
+      const response = await axios.get(this.url + "users/" + this.profileId + "/recipes")
       this.recipes = response.data.data
       this.paginationData = response.data.pagination
     },
@@ -60,3 +69,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>
