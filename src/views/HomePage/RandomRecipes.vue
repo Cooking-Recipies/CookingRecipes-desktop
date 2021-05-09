@@ -2,10 +2,9 @@
   <div>
     <h1>Random recipes</h1>
     <b-card-group deck>
-      <recipe-card v-for="(recipe) in recipes" :key="recipe.recipe_id"
+      <recipe-card v-for="(recipe, index) in recipes" :key="index"
                    :title="recipe.title"
                    :category="recipe.category"
-                   :likes="recipe.likes_count"
                    :tags="recipe.tags"
                    :image_src="recipe.photos"
                    :recipe-id="currentRecipeId"
