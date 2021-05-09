@@ -12,7 +12,7 @@
         {{ category }}
       </b-card-text>
 
-      <b-card-body>
+      <b-card-body v-if="hasLikes">
         <b-img src="@/assets/like.svg" height="25"></b-img>
         {{ likes }}
       </b-card-body>
@@ -40,7 +40,8 @@ export default {
     image: String,
     tags: Array,
     recipeId: Number,
-    authorId: String
+    authorId: String,
+    hasLikes: String
   },
   methods: {
     goToRecipePage: function () {

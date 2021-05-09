@@ -10,6 +10,7 @@
                      :title="recipe.title"
                      :category="recipe.category"
                      :likes="recipe.likes.likes_count"
+                     :has-likes="'true'"
                      :tags="recipe.tags"
                      :image_src="recipe.photos"
                      :recipe-id="recipe.recipe_id"
