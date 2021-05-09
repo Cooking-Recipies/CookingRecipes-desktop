@@ -65,7 +65,6 @@ export default {
         })
         this.userProfileData = response.data.data
         this.userProfilePicture = response.data.data.photo.url
-        console.log(this.userProfilePicture)
       } catch (error) {
         this.errors = error.response.data.message
       }

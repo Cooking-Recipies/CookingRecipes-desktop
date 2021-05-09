@@ -3,10 +3,10 @@ import VueRouter from 'vue-router'
 import Home from '../views/HomePage/Home.vue'
 import Login from '../views/Login/Login.vue'
 import Register from '../views/Login/Register.vue'
-import ProfileCard from "../views/UserProfile/ProfileCard";
+import LoggedUserProfile from "../views/UserProfile/LoggedUserProfile";
 import AddRecipe from "../views/Recipes/Add/AddRecipe";
-import ProfilePicture from "../views/UserProfile/content/ProfilePicture";
-import ProfileUploadedPhotos from "../views/UserProfile/content/ProfileUploadedPhotos";
+import ProfilePicture from "../views/UserProfile/content/management/ProfilePicture";
+import ProfileUploadedPhotos from "../views/UserProfile/content/management/ProfileUploadedPhotos";
 import BrowseRecipes from "../views/Recipes/Display/BrowseRecipes";
 import DisplayRecipe from "../views/Recipes/Display/DisplayRecipe";
 import ProfileDisplay from "../views/UserProfile/ProfileDisplay";
@@ -21,14 +21,6 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
     path: '/login',
     name: 'Login',
     component: Login
@@ -40,8 +32,8 @@ const routes = [
   },
   {
     path: '/profile',
-    name: 'ProfileCard',
-    component: ProfileCard
+    name: 'LoggedUserProfile',
+    component: LoggedUserProfile
   },
   {
     path: '/profilePicture',

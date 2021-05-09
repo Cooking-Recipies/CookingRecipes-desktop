@@ -19,7 +19,7 @@
 }
 </style>
 <script>
-import Navbar from "./views/Navbar/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 
 export default {
   components: {Navbar}

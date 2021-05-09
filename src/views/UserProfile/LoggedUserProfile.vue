@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import ProfileInfo from "./content/ProfileInfo";
-import ProfileSettings from "./content/ProfileSettings";
-import ProfileSocial from "./content/ProfileSocial";
+import ProfileInfo from "./content/management/ProfileInfo";
+import ProfileSettings from "./content/settings/ProfileSettings";
+import ProfileSocial from "./content/management/ProfileSocial";
 
 export default {
   name: "ProfileCard",
