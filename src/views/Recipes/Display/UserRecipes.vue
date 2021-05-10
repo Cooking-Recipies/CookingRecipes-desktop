@@ -12,6 +12,7 @@
                      :tags="recipe.tags"
                      :image_src="recipe.photos"
                      :recipe-id="recipe.recipe_id"
+                     :is-owner="true"
         ></recipe-card>
       </b-card-group>
       <b-pagination
