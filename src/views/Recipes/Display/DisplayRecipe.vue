@@ -10,12 +10,13 @@
           <Info :tags="recipe.tags"
                 :servings="recipe.preparing_time"
                 :time="recipe.number_of_people"
+                :recipe-id="$route.params.id"
           />
         </b-col>
 
         <b-col cols="9">
           <h4>Author of the recipe</h4>
-            <b-button @click="goToProfile">{{author.name}}</b-button>
+          <b-button @click="goToProfile">{{ author.name }}</b-button>
 
           <Steps :ingredients="recipe.components"
                  :steps="recipe.instruction"
@@ -72,7 +73,7 @@ export default {
       this.author = response.data.data
     },
     goToProfile: function () {
-      this.$router.push({name: "ProfileDisplay", params: { id: this.recipe.user_profile_id } })
+      this.$router.push({name: "ProfileDisplay", params: {id: this.recipe.user_profile_id}})
     }
   },
 }
