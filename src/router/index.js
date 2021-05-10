@@ -11,6 +11,7 @@ import BrowseRecipes from "../views/Recipes/Display/BrowseRecipes";
 import DisplayRecipe from "../views/Recipes/Display/DisplayRecipe";
 import ProfileDisplay from "../views/UserProfile/ProfileDisplay";
 import UserRecipes from "../views/Recipes/Display/UserRecipes";
+import EditRecipe from "../views/Recipes/Manage/EditRecipe";
 
 Vue.use(VueRouter)
 
@@ -66,9 +67,14 @@ const routes = [
     component: ProfileDisplay
   },
   {
-    path: '/UserRecipes',
-    name: 'userRecipes',
+    path: '/userRecipes',
+    name: 'UserRecipes',
     component: UserRecipes
+  },
+  {
+    path: '/editRecipe',
+    name: 'EditRecipe',
+    component: EditRecipe
   },
 ]
 
