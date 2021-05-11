@@ -2,7 +2,7 @@
   <div id="app">
     <navbar/>
     <b-container>
-      <b-row class="vh-100 text-center" align-v="center">
+      <b-row class="vh-100 justify-content-md-center">
         <router-view/>
       </b-row>
     </b-container>
@@ -19,7 +19,7 @@
 }
 </style>
 <script>
-import Navbar from "./views/Navbar/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 
 export default {
   components: {Navbar}

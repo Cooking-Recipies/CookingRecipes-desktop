@@ -1,18 +1,18 @@
 <template>
   <div class="home">
     <RecipeCarousel/>
-    <RecipeCardDeck/>
+    <RandomRecipes/>
   </div>
 </template>
 
 <script>
 import RecipeCarousel from './RecipeCarousel.vue'
-import RecipeCardDeck from "./RecipeCardDeck";
+import RandomRecipes from "./RandomRecipes";
 
 export default {
   name: 'Home',
   components: {
-    RecipeCardDeck,
+    RandomRecipes,
     RecipeCarousel
   }
 }
