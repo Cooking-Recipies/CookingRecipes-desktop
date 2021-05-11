@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-row>
-      <b-col>
-        <div v-for="comment in comments" :key="comment.id">
+    <div v-for="comment in comments" :key="comment.id">
+      <b-row>
+        <b-col cols="10">
           <hr>
           <h4>{{ comment.comment }}<br>
 
@@ -10,9 +10,15 @@
 
             Rating {{ comment.rate }}/5
           </h4>
-        </div>
-      </b-col>
-    </b-row>
+        </b-col>
+        <b-col>
+          <hr>
+          <b-button variant="outline-light" @click="likeOrUnlike(comment.id)">
+            <b-img width="80" :src="require('@/assets/like.svg')"></b-img>
+          </b-button>
+        </b-col>
+      </b-row>
+    </div>
 
     <b-form v-if="isLogged">
       <b-row>
@@ -45,7 +51,7 @@ export default {
   },
   data: function () {
     return {
-      url: "http://localhost/api/recipes/",
+      url: "http://localhost/api/",
       comments: [],
       rates: [1, 2, 3, 4, 5],
       rating: null,
@@ -59,7 +65,7 @@ export default {
   },
   methods: {
     getRates: async function () {
-      axios.get(this.url + this.recipeId + "/rates")
+      axios.get(this.url + "recipes/" + this.recipeId + "/rates")
           .then((value) => {
             this.comments = value.data.data
           })
@@ -69,12 +75,33 @@ export default {
         "rate": this.rating,
         "comment": this.comment
       }
-      await axios.post(this.url + this.recipeId + "/rates", form, {
+      await axios.post(this.url + "recipes/" + this.recipeId + "/rates", form, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token")
         }
       })
       await this.$router.push("/browseRecipes")
+    },
+    likeOrUnlike: async function (commentId) {
+      try {
+        await this.likeComment(commentId)
+      } catch {
+        await this.unlikeComment(commentId)
+      }
+    },
+    likeComment: async function (commentId) {
+      await axios.post(this.url + "rates/" + commentId + "/likes", {}, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+    },
+    unlikeComment: async function (commentId) {
+      await axios.delete(this.url + "rates/" + commentId + "/likes", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
     },
     checkIfLogged: function () {
       if (localStorage.getItem("token") !== null) {
