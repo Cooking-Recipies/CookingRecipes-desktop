@@ -43,7 +43,6 @@ export default {
   name: "Navbar",
   data: function() {
     return {
-      isLoggedIn: false,
     }
   },
   created() {
@@ -55,7 +54,16 @@ export default {
   methods: {
     logout: function () {
       localStorage.clear()
-      window.location.reload()
+      this.$router.push("/")
+    }
+  },
+  computed: {
+    isLoggedIn: function () {
+      let token = localStorage.getItem("token")
+      if (token !== null) {
+        return true
+      }
+      return false
     }
   }
 }
