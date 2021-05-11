@@ -6,7 +6,7 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
+        <b-navbar-nav v-if="isLoggedIn">
           <b-nav-item to="/addRecipe">Add recipe</b-nav-item>
         </b-navbar-nav>
 
@@ -14,16 +14,11 @@
           <b-nav-item to="/browseRecipes">Browse recipes</b-nav-item>
         </b-navbar-nav>
 
-        <b-navbar-nav>
+        <b-navbar-nav v-if="isLoggedIn">
           <b-nav-item to="/userRecipes">My recipes</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-nav-form>
-            <b-form-input size="sm" class="mr-sm-2" placeholder="Search for a recipe"></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
-          </b-nav-form>
-
           <b-nav-item-dropdown right>
             <template #button-content>
               <b-img src="@/assets/user.svg" alt="Account"></b-img>
